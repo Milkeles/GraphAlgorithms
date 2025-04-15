@@ -6,7 +6,7 @@ This repository contains C++ implementations and a test generator for a research
 
 This paper is written by Hristo Hristov, a bachelor student at the University of Ruse "A. Kanchev", Bulgaria, under the supervision of Assoc. Prof. Galina Atanasova. The work is prepared for a student scientific session at the university. The paper, titled *"Graph Pathfinding Algorithms and Their Applications"*, provides a comprehensive analysis of classical and modern graph algorithms. It explores their practical applications and trade-offs, drawing insights from recent developments in graph theory. Each algorithm's performance is evaluated based on the following two metrics:
 
-- **Size of Graphs:** Evaluated using graphs of varying sizes (\( N = 100, 1,000, 10,000 \)) with a fixed density (\( D = 0.1 \)).
+- **Size of Graphs:** Evaluated using graphs of varying sizes (N = 100, 1,000, 10,000) with a fixed density (D = 0.1).
 - **Density of Graphs:** Tested at \( N = 1,000 \) with densities \( D = 0.1, 0.5, 0.9 \).
 
 Specific results regarding the performance and memory usage will be available in the paper itself.
