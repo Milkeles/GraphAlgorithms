@@ -88,7 +88,7 @@ public:
         std::string filename = "graph_N" + std::to_string(N) +
                               "_D" + std::to_string(D) +
                               "_neg" + (allow_negative_weights ? "true" : "false") +
-                              "_" + std::to_string(graph_id) + ".txt";
+                              "_" + std::to_string(graph_id) + ".in";
 
         std::ofstream outfile(filename);
         if (!outfile) {
