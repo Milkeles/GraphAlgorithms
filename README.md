@@ -7,16 +7,16 @@ This repository contains C++ implementations and a test generator for a research
 This paper is written by Hristo Hristov, a bachelor student at the University of Ruse "A. Kanchev", Bulgaria, under the supervision of Assoc. Prof. Galina Atanasova. The work is prepared for a student scientific session at the university. The paper, titled *"Graph Pathfinding Algorithms and Their Applications"*, provides a comprehensive analysis of classical and modern graph algorithms. It explores their practical applications and trade-offs, drawing insights from recent developments in graph theory. Each algorithm's performance is evaluated based on the following two metrics:
 
 - **Size of Graphs:** Evaluated using graphs of varying sizes (N = 100, 1,000, 10,000) with a fixed density (D = 0.1).
-- **Density of Graphs:** Tested at \( N = 1,000 \) with densities \( D = 0.1, 0.5, 0.9 \).
+- **Density of Graphs:** Tested at (N = 1,000) with densities (D = 0.1, 0.5, 0.9).
 
 Specific results regarding the performance and memory usage will be available in the paper itself.
 This repository provides the tools to generate test graphs and will eventually include implementations of the algorithms discussed in the paper.
 
 ## Repository Contents
 
-- **`testGenerator.cpp`**: A C++ program to generate random, connected graphs using the Erdős–Rényi model. It creates graphs with specified \( N \) (number of nodes) and \( D \) (density), with an option to allow negative edge weights.
+- **`testGenerator.cpp`**: A C++ program to generate random, connected graphs using the Erdős–Rényi model. It creates graphs with specified (N) (number of nodes) and (D) (density), with an option to allow negative edge weights.
 - **Generated Graphs**: Test graph files (e.g., `graph_N100_D0.1_negfalse_1.txt`) stored in the repository root, containing edge lists for use in algorithm testing.
-  - Format: First line is \( N \), followed by lines of `source target weight`.
+  - Format: First line is (N), followed by lines of `source target weight`.
 
 ## Usage
 
@@ -52,7 +52,7 @@ This repository provides the tools to generate test graphs and will eventually i
 
 ### Customizing Test Graphs
 
-- **Modify Parameters:** Edit the `size_tests` and `density_tests` arrays in `testGenerator.cpp` to change \( N \) and \( D \). For example:
+- **Modify Parameters:** Edit the `size_tests` and `density_tests` arrays in `testGenerator.cpp` to change (N) and (D). For example:
 
   ```cpp
   std::vector<std::pair<int, double>> size_tests = {
@@ -71,6 +71,6 @@ This repository provides the tools to generate test graphs and will eventually i
 ## File Structure
 
 - `testGenerator.cpp`: Source code for the test graph generator.
-- `graph_N*_D*_neg*_*.txt`: Generated graph files (e.g., `graph_N100_D0.100000_negfalse_1.txt`).
+- `graph_N*_D*_neg*_*.in`: Generated graph files (e.g., `graph_N100_D0.100000_negfalse_1.txt`).
 - `README.md`: This file.
 
