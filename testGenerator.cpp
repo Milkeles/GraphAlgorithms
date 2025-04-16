@@ -1,28 +1,43 @@
-// Hristo Hristov
+/* This program uses the Erdos-Renyi model to automatically generate random graphs
+*  with predefined density and size then save it into input files for testing purposes.
+*  
+*  Libraries:
+*  - iostream: To print out messages and errors.
+*  - vector: For the vector STL class and its methods
+*  - random: To generate random numbers
+*  - fstream: Writing into files.
+*  - set: For the STL set class and its methods, used to store unique elements.
+*
+*  Author: H. Hristov
+*  Ruse, 2025
+*/
 #include <iostream>
 #include <vector>
 #include <random>
 #include <fstream>
-#include <filesystem>
 #include <set>
+
+using namespace std;
 
 class GraphGenerator {
 private:
     int N; // Number of nodes
     double D; // Density
-    bool allow_negative_weights;
-    std::vector<std::vector<std::pair<int, int>>> adj_list; // Adjacency list (neighbor, weight)
+    bool allowNegativeWeights;
+    vector<vector<pair<int, int>>> adjList; // Adjacency list (neighbor, weight)
 
     // Random number generators
-    std::mt19937 rng;
-    std::uniform_real_distribution<double> dist_prob;
-    std::uniform_int_distribution<int> dist_weight_pos;
-    std::uniform_int_distribution<int> dist_weight_neg;
+    mt19937 rng;
+    uniform_real_distribution<double> distProb;
+    uniform_int_distribution<int> distWeightPos;
+    uniform_int_distribution<int> distWeightNeg;
 
-    // DFS to check if graph is connected
-    void dfs(int v, std::vector<bool>& visited) {
+    /* DFS to traverse the graph.
+     * Used to check if the graoh is connected.
+     */
+    void dfs(int v, vector<bool>& visited) {
         visited[v] = true;
-        for (const auto& [u, w] : adj_list[v]) {
+        for (const auto& [u, w] : adjList[v]) {
             if (!visited[u]) {
                 dfs(u, visited);
             }
@@ -30,8 +45,8 @@ private:
     }
 
     // Check if the graph is connected
-    bool is_connected() {
-        std::vector<bool> visited(N, false);
+    bool IsConnected() {
+        vector<bool> visited(N, false);
         dfs(0, visited);
         for (bool v : visited) {
             if (!v) return false;
@@ -40,110 +55,103 @@ private:
     }
 
 public:
-    GraphGenerator(int nodes, double density, bool neg_weights)
-        : N(nodes), D(density), allow_negative_weights(neg_weights),
+    GraphGenerator(int nodes, double density, bool negWeights)
+        : N(nodes), D(density), allowNegativeWeights(negWeights),
           rng(static_cast<unsigned>(time(0))),
-          dist_prob(0.0, 1.0),
-          dist_weight_pos(1, 10),
-          dist_weight_neg(-10, 10) {
-        adj_list.resize(N);
+          distProb(0.0, 1.0),
+          distWeightPos(1, 10),
+          distWeightNeg(-10, 10) {
+        adjList.resize(N);
     }
 
-    // Generate a connected random graph
+    // Generate a random connected graph
     void generate_graph() {
         while (true) {
-            // Clear the previous graph
-            for (auto& neighbors : adj_list) {
+            for (auto& neighbors : adjList) {
                 neighbors.clear();
             }
 
-            // Generate edges using Erdős–Rényi model
+            // Generate edges using Erdos-Renyi model
             for (int u = 0; u < N; ++u) {
                 for (int v = u + 1; v < N; ++v) {
-                    if (dist_prob(rng) < D) {
+                    if (distProb(rng) < D) {
                         int weight;
-                        if (allow_negative_weights) {
+                        if (allowNegativeWeights) {
                             do {
-                                weight = dist_weight_neg(rng);
+                                weight = distWeightNeg(rng);
                             } while (weight == 0); // Avoid zero weights
                         } else {
-                            weight = dist_weight_pos(rng);
+                            weight = distWeightPos(rng);
                         }
-                        adj_list[u].push_back({v, weight});
-                        adj_list[v].push_back({u, weight}); // Undirected graph
+                        adjList[u].push_back({v, weight});
+                        adjList[v].push_back({u, weight}); // Undirected graph
                     }
                 }
             }
 
             // Check if the graph is connected
-            if (is_connected()) {
+            if (IsConnected()) {
                 break;
             }
         }
     }
 
     // Save the graph to a file in the current directory
-    void save_to_file(const std::string& output_dir, int graph_id) {
-        // Construct filename (output_dir is "." for current directory)
-        std::string filename = "graph_N" + std::to_string(N) +
-                              "_D" + std::to_string(D) +
-                              "_neg" + (allow_negative_weights ? "true" : "false") +
-                              "_" + std::to_string(graph_id) + ".in";
+    void SaveToFile(const string& output_dir, int graph_id) {
+        string filename = "graph_N" + to_string(N) +
+                              "_D" + to_string(D) +
+                              "_neg" + (allowNegativeWeights ? "true" : "false") +
+                              "_" + to_string(graph_id) + ".in";
 
-        std::ofstream outfile(filename);
+        ofstream outfile(filename);
         if (!outfile) {
-            std::cerr << "Error: Could not open file " << filename << std::endl;
+            cerr << "Error: Could not open file " << filename << endl;
             return;
         }
 
-        // Write number of nodes
         outfile << N << "\n";
 
         // Write edges as edge list: source target weight
-        std::set<std::pair<int, int>> written_edges; // To avoid duplicates
+        set<pair<int, int>> written_edges;
         for (int u = 0; u < N; ++u) {
-            for (const auto& [v, weight] : adj_list[u]) {
-                if (u < v) { // Only write each edge once (u < v)
+            for (const auto& [v, weight] : adjList[u]) {
+                if (u < v) { // Only write each edge once
                     outfile << u << " " << v << " " << weight << "\n";
                 }
             }
         }
 
         outfile.close();
-        std::cout << "Generated graph saved to " << filename << std::endl;
+        cout << "Generated graph saved to " << filename << endl;
     }
 };
 
 int main() {
-    // Parameters for size tests (fixed D = 0.5)
-    std::vector<std::pair<int, double>> size_tests = {
-        {100, 0.1},    // Small
-        {1000, 0.1},   // Medium
-        {10000, 0.1}   // Large
+    vector<pair<int, double>> sizeTests = {
+        {100, 0.1},
+        {1000, 0.1},
+        {10000, 0.1}
     };
 
-    // Parameters for density tests (fixed N = 1000)
-    std::vector<std::pair<int, double>> density_tests = {
-        {1000, 0.1},   // Sparse
-        {1000, 0.5},   // Medium
-        {1000, 0.9}    // Dense
+    vector<pair<int, double>> densityTests = {
+        {1000, 0.1}, 
+        {1000, 0.5},
+        {1000, 0.9}
     };
 
-    bool allow_negative_weights = false; // Toggle this to true for negative weights
-    std::string output_dir = "."; // Save in the current directory
+    bool allowNegativeWeights = false; // Toggle this to true for negative weights
+    string output_dir = ".";
 
-    // Generate graphs for size tests (1 graph per configuration)
-    for (const auto& [N, D] : size_tests) {
-        GraphGenerator generator(N, D, allow_negative_weights);
+    for (const auto& [N, D] : sizeTests) {
+        GraphGenerator generator(N, D, allowNegativeWeights);
         generator.generate_graph();
-        generator.save_to_file(output_dir, 1);
+        generator.SaveToFile(output_dir, 1);
     }
 
-    // Generate graphs for density tests (1 graph per configuration)
-    for (const auto& [N, D] : density_tests) {
-        GraphGenerator generator(N, D, allow_negative_weights);
+    for (const auto& [N, D] : densityTests) {
+        GraphGenerator generator(N, D, allowNegativeWeights);
         generator.generate_graph();
-        generator.save_to_file(output_dir, 1);
+        generator.SaveToFile(output_dir, 1);
     }
 
     return 0;
