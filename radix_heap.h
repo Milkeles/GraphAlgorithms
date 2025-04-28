@@ -1,3 +1,8 @@
+/* [DESCRIPTION]
+ * This file is a header implementation of the Radix-Heap data structure.
+ * 
+ * Author: Unknown
+ */
 #include <algorithm>
 #include <array>
 #include <cassert>
@@ -290,4 +295,4 @@ class pair_radix_heap {
     buckets_min_[i] = std::numeric_limits<unsigned_key_type>::max();
   }
 };
-}  // namespace radix_heap
+}
