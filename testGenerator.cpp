@@ -1,16 +1,17 @@
-/* This program uses the Erdos-Renyi model to automatically generate random graphs
-*  with predefined density and size then save it into input files for testing purposes.
-*  
-*  Libraries:
-*  - iostream: To print out messages and errors.
-*  - vector: For the vector STL class and its methods
-*  - random: To generate random numbers
-*  - fstream: Writing into files.
-*  - set: For the STL set class and its methods, used to store unique elements.
-*
-*  Author: H. Hristov
-*  Ruse, 2025
-*/
+/* [Description]
+ * This program uses the Erdos-Renyi model to automatically generate random graphs
+ *  with predefined density and size then save it into input files for testing purposes.
+ *  
+ *  Libraries:
+ *  - iostream: To print out messages and errors.
+ *  - vector: For the vector STL class and its methods
+ *  - random: To generate random numbers
+ *  - fstream: Writing into files.
+ *  - set: For the STL set class and its methods, used to store unique elements.
+ *
+ *  Author: H. Hristov
+ *  Ruse, 2025
+ */
 #include <iostream>
 #include <vector>
 #include <random>
@@ -139,7 +140,7 @@ int main() {
         {1000, 0.9}
     };
 
-    bool allowNegativeWeights = false; // Toggle this to true for negative weights
+    bool allowNegativeWeights = true; // Toggle this to true for negative weights
     string output_dir = ".";
 
     for (const auto& [N, D] : sizeTests) {
