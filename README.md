@@ -1,10 +1,10 @@
 # Pathfinding Algorithms Research
 
-This repository contains C++ implementations and a test generator for a research paper on pathfinding algorithms. The paper reviews various categories of graph algorithms — shortest path, cycle detection, minimum spanning tree (MST), and maximum flow—analyzing their computational complexity, memory usage, and scalability. The code here supports the empirical evaluation of these algorithms by generating test graphs with specified sizes and densities. Implementations of the algorithms outlined in the paper are also provided.
+This repository contains C++ implementations and a test generator for a research paper on shortest path algorithms. The paper reviews various categories of graph algorithms — single source shortest path, all-pairs shortest path, and heuristic algorithms, analyzing their computational complexity, memory usage, and scalability. The code here supports the empirical evaluation of these algorithms by generating test graphs with specified sizes and densities. Implementations of the algorithms outlined in the paper are also provided.
 
 ## Research Context
 
-This paper is written by Hristo Hristov, a bachelor student at the University of Ruse "A. Kanchev", Bulgaria, under the supervision of Assoc. Prof. Galina Atanasova. The work is prepared for a student scientific session at the university. The paper, titled *"Graph Pathfinding Algorithms and Their Applications"*, provides a comprehensive analysis of classical and modern graph algorithms. It explores their practical applications and trade-offs, drawing insights from recent developments in graph theory. Each algorithm's performance is evaluated based on the following two metrics:
+This paper is written by Hristo Hristov, a bachelor student at the University of Ruse "A. Kanchev", Bulgaria, under the supervision of Assoc. Prof. Galina Atanasova. The work is prepared for a student scientific session at the university. The paper, titled *"Graph Shortest Path Algorithms and Their Applications"*, provides a comprehensive analysis of classical and modern graph algorithms and approaches. It explores their practical applications and trade-offs, drawing insights from recent developments in graph theory. Each algorithm's performance is evaluated based on the following two metrics:
 
 - **Size of Graphs:** Evaluated using graphs of varying sizes (N = 100, 1,000, 10,000) with a fixed density (D = 0.1).
 - **Density of Graphs:** Tested at (N = 1,000) with densities (D = 0.1, 0.5, 0.9).
@@ -69,8 +69,8 @@ This repository provides the tools to generate test graphs and will eventually i
 - Test scripts to run and compare algorithm performance using the generated graphs.
 
 ## File Structure
-
+- Algorithm implementations.
 - `testGenerator.cpp`: Source code for the test graph generator.
 - `graph_N*_D*_neg*_*.in`: Generated graph files (e.g., `graph_N100_D0.100000_negfalse_1.txt`).
 - `README.md`: This file.
-
+**Note:** *Due to the complexity of the algorithm outlined in the paper "Negative-weight single-source shortest paths in near-linear time" by Aaron Bernstein, Danupon Nanongkai and Christian Wulff-Nilsen, a java implementation provided by Nevin George was used. The said implementation can be found [here](https://github.com/nevingeorge/Negative-Weight-SSSP).*
