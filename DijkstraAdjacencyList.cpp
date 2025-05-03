@@ -49,7 +49,7 @@ int main() {
     
     chrono::steady_clock::time_point begin = chrono::steady_clock::now();
     
-    string filePath = "graph_N100_D0.100000_negfalse_1.in";
+    string filePath = "graph_N10000_D0.100000_negfalse_1.in";
     ifstream fileStream(filePath);
     
     int N;
@@ -85,11 +85,11 @@ int main() {
         }
     }
     
-    for (int i = 1; i <= N; i++) {
-        if (distances[i] == INF) cout << "-1 ";
-        else cout << distances[i] << " ";
-    }
-    cout << endl;
+    // for (int i = 1; i <= N; i++) {
+    //     if (distances[i] == INF) cout << "-1 ";
+    //     else cout << distances[i] << " ";
+    // }
+    // cout << endl;
 
     chrono::steady_clock::time_point end = chrono::steady_clock::now();
     cout << "\nMemory usage after algorithm:\n";

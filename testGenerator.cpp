@@ -129,16 +129,16 @@ public:
 
 int main() {
     vector<pair<int, double>> sizeTests = {
-        {100, 0.1},
-        {1000, 0.1},
-        {10000, 0.1}
+        // {100, 0.1},
+        // {1000, 0.1},
+        {10000, 0.01}
     };
 
-    vector<pair<int, double>> densityTests = {
-        {1000, 0.1}, 
-        {1000, 0.5},
-        {1000, 0.9}
-    };
+    // vector<pair<int, double>> densityTests = {
+    //     {1000, 0.1}, 
+    //     {1000, 0.5},
+    //     {1000, 0.9}
+    // };
 
     bool allowNegativeWeights = true; // Toggle this to true for negative weights
     string output_dir = ".";
@@ -149,11 +149,11 @@ int main() {
         generator.SaveToFile(output_dir, 1);
     }
 
-    for (const auto& [N, D] : densityTests) {
-        GraphGenerator generator(N, D, allowNegativeWeights);
-        generator.generate_graph();
-        generator.SaveToFile(output_dir, 1);
-    }
+    // for (const auto& [N, D] : densityTests) {
+    //     GraphGenerator generator(N, D, allowNegativeWeights);
+    //     generator.generate_graph();
+    //     generator.SaveToFile(output_dir, 1);
+    // }
 
     return 0;
 }

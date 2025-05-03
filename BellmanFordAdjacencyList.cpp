@@ -28,7 +28,9 @@ using namespace std;
 
 const long long INF = 1e18;
 
-/* Prints peak and current memory usage of the process (Linux-specific). */
+/* This function measures the memory usage of the current program and prints it out.
+ * The function will probably not work on Windows! The /proc/self/status file seems to be Linux-specific.
+ */
 void PrintMemoryUsage() {
     ifstream status("/proc/self/status");
     string line;
@@ -48,7 +50,7 @@ int main() {
 
     chrono::steady_clock::time_point begin = chrono::steady_clock::now();
 
-    string filePath = "graph_N100_D0.100000_negtrue_1.in";
+    string filePath = "graph_N10000_D0.100000_negtrue_1.in";
     ifstream fileStream(filePath);
 
     int N;
@@ -90,11 +92,11 @@ int main() {
         }
     }
 
-    for (int i = 1; i <= N; ++i) {
-        if (distances[i] == INF) cout << "INF ";
-        else cout << distances[i] << " ";
-    }
-    cout << '\n';
+    // for (int i = 1; i <= N; ++i) {
+    //     if (distances[i] == INF) cout << "INF ";
+    //     else cout << distances[i] << " ";
+    // }
+    // cout << '\n';
 
     if (negCycle) {
         cout << "Warning: negative weight cycle detected." << '\n';
@@ -103,7 +105,7 @@ int main() {
     chrono::steady_clock::time_point end = chrono::steady_clock::now();
     cout << "\nMemory usage after algorithm:\n";
     PrintMemoryUsage();
-    cout << "Elapsed time = " << chrono::duration_cast<chrono::nanoseconds> (end - begin).count() << " ns" << '\n';
+    cout << "Elapsed time = " << chrono::duration_cast<chrono::nanoseconds>(end - begin).count() << " ns\n";
 
     return 0;
 }

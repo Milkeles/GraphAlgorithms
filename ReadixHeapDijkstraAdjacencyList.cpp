@@ -21,7 +21,9 @@
  using namespace std;
  static constexpr long long INF = numeric_limits<long long>::max();
  
- // Linux-only: print VmPeak and VmRSS from /proc/self/status
+/* This function measures the memory usage of the current program and prints it out.
+ * The function will probably not work on Windows! The /proc/self/status file seems to be Linux-specific.
+ */
  void PrintMemoryUsage(){
      ifstream status("/proc/self/status");
      string line;
@@ -42,7 +44,7 @@
      PrintMemoryUsage();
      auto begin = chrono::steady_clock::now();
  
-     const string filePath = "graph_N1000_D0.100000_negfalse_1.in";
+     const string filePath = "graph_N10000_D0.100000_negfalse_1.in";
      ifstream in(filePath);
      int N; in>>N;
      vector<vector<pair<int,long long>>> adj(N+1);
