@@ -63,11 +63,6 @@ This repository provides the tools to generate test graphs and will eventually i
   ```
 - **Negative Weights:** Toggle the `allow_negative_weights` boolean to `true` to include negative edge weights (range: -10 to 10, excluding 0).
 
-### Future Additions
-
-- C++ implementations of shortest path algorithms (e.g., Dijkstra’s, Bellman-Ford, A*).
-- Test scripts to run and compare algorithm performance using the generated graphs.
-
 ## File Structure
 - Algorithm implementations.
 - `testGenerator.cpp`: Source code for the test graph generator.
