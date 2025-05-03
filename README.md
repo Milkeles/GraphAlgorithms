@@ -73,4 +73,5 @@ This repository provides the tools to generate test graphs and will eventually i
 - `testGenerator.cpp`: Source code for the test graph generator.
 - `graph_N*_D*_neg*_*.in`: Generated graph files (e.g., `graph_N100_D0.100000_negfalse_1.txt`).
 - `README.md`: This file.
+
 **Note:** *Due to the complexity of the algorithm outlined in the paper "Negative-weight single-source shortest paths in near-linear time" by Aaron Bernstein, Danupon Nanongkai and Christian Wulff-Nilsen, a java implementation provided by Nevin George was used. The said implementation can be found [here](https://github.com/nevingeorge/Negative-Weight-SSSP).*
